@@ -3,25 +3,37 @@ import java.util.Iterator;
 
 /**
  * The class is a self-expanding list with an array at the base
- * @see MyList
+ *
  * @version 1.0
+ * @see MyList
  */
 public class MyArrayList<T> implements MyList<T> {
-    /** field indicates the default capacity */
+    /**
+     * field indicates the default capacity
+     */
     private static final int DEFAULT_CAPACITY = 10;
-    /** field indicates the maximum capacity */
-    private static final int MAX_CAPACITY=Integer.MAX_VALUE;
+    /**
+     * field indicates the maximum capacity
+     */
+    private static final int MAX_CAPACITY = Integer.MAX_VALUE;
 
-    /** field with base array */
+    /**
+     * field with base array
+     */
     private T[] array;
-    /** field indicates current capacity */
+    /**
+     * field indicates current capacity
+     */
     private int capacity;
-    /** field indicates current size */
+    /**
+     * field indicates current size
+     */
     private int size;
 
     /**
      * Default constructor without arguments
      * creates {@link MyArrayList} with default capacity
+     *
      * @see MyArrayList
      */
     public MyArrayList() {
@@ -31,6 +43,7 @@ public class MyArrayList<T> implements MyList<T> {
 
     /**
      * Constructor with current capacity
+     *
      * @param capacity - initial capacity
      * @see MyArrayList
      */
@@ -57,12 +70,13 @@ public class MyArrayList<T> implements MyList<T> {
         }
         capacity = newCapacity;
         T[] newArray = (T[]) new Object[newCapacity];
-        System.arraycopy(array,0,newArray,0,array.length);
+        System.arraycopy(array, 0, newArray, 0, array.length);
         array = newArray;
     }
 
     /**
      * Method adds elements to the internal array
+     *
      * @param e - new element
      */
     @Override
@@ -77,6 +91,7 @@ public class MyArrayList<T> implements MyList<T> {
 
     /**
      * Method for getting element from array
+     *
      * @param index - index of element in internal array
      */
     @Override
@@ -87,6 +102,7 @@ public class MyArrayList<T> implements MyList<T> {
     /**
      * Method for remove element from internal array
      * and shift all subsequent elements to the left
+     *
      * @param index - index of element in internal array
      */
     @Override
@@ -94,13 +110,14 @@ public class MyArrayList<T> implements MyList<T> {
         if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        System.arraycopy(array, index+1, array, index, array.length - (index+1));
+        System.arraycopy(array, index + 1, array, index, array.length - (index + 1));
         size--;
         return true;
     }
 
     /**
      * Method checks if there is an element in internal array
+     *
      * @param e - element for check
      */
     @Override
@@ -124,15 +141,17 @@ public class MyArrayList<T> implements MyList<T> {
 
     /**
      * Method returns {@link Iterator}
+     *
      * @see Iterator
      */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            private int cursor=0;
+            private int cursor = 0;
+
             @Override
             public boolean hasNext() {
-                return cursor!=size;
+                return cursor != size;
             }
 
             @Override
@@ -147,57 +166,53 @@ public class MyArrayList<T> implements MyList<T> {
 
     /**
      * Method for initiate quick sort {@link Comparable} elements
+     *
      * @see Comparable
      * @see MyArrayList#quickSort(Comparable[], int, int)
      */
-    public <T extends Comparable<T>> void qSort() {
+    public void qSort() {
         T[] source = (T[]) this.array;
         int left = 0;
         int right = size;
-        quickSort(source,left,right);
+        quickSort(source, left, right);
     }
 
     /**
      * Method for quick sort {@link Comparable} elements
+     *
      * @see Comparable
      */
-    public <T extends Comparable<T>> void quickSort(T[] source, int leftBorder, int rightBorder) {
-        int leftMarker = leftBorder;
-        int rightMarker = rightBorder;
+    public <T extends Comparable<T>> void quickSort(T[] source, int left, int right) {
+        int leftMarker = left;
+        int rightMarker = right;
         T pivot = source[(leftMarker + rightMarker) / 2];
         do {
-            // Двигаем левый маркер слева направо пока элемент меньше, чем pivot
-            while (pivot.compareTo(source[leftMarker])>0) {
+            while (pivot.compareTo(source[leftMarker]) > 0) {
                 leftMarker++;
             }
-            // Двигаем правый маркер, пока элемент больше, чем pivot
-            while (pivot.compareTo(source[rightMarker])<0) {
+            while (pivot.compareTo(source[rightMarker]) < 0) {
                 rightMarker--;
             }
-            // Проверим, не нужно обменять местами элементы, на которые указывают маркеры
             if (leftMarker <= rightMarker) {
-                // Левый маркер будет меньше правого только если мы должны выполнить swap
                 if (leftMarker < rightMarker) {
-                    swap(source,leftMarker,rightMarker);
+                    swap(source, leftMarker, rightMarker);
                 }
-                // Сдвигаем маркеры, чтобы получить новые границы
                 leftMarker++;
                 rightMarker--;
             }
         } while (leftMarker <= rightMarker);
-
-        if (leftMarker < rightBorder) {
-            quickSort(source, leftMarker, rightBorder);
+        if (leftMarker < right) {
+            quickSort(source, leftMarker, right);
         }
-        if (leftBorder < rightMarker) {
-            quickSort(source, leftBorder, rightMarker);
+        if (left < rightMarker) {
+            quickSort(source, left, rightMarker);
         }
     }
 
     /**
      * Method swap two elements in array
      */
-    private <T> void swap(T[] array, int wall,int currentElement) {
+    private <T> void swap(T[] array, int wall, int currentElement) {
         T temp = array[wall];
         array[wall] = array[currentElement];
         array[currentElement] = temp;
