@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,16 +35,16 @@ public class MyArrayListTest {
     public void shouldRemoveElementInArrayAndMoveNextElementsToRight() {
         int expectedResult = 50;
 
-        for (int i = 0; i <100 ; i++) {
+        for (int i = 0; i < 100; i++) {
             list.add(i);
         }
-        for (int i = 0; i <50 ; i++) {
+        for (int i = 0; i < 50; i++) {
             list.remove(0);
         }
 
         for (int i = 0; i < 50; i++) {
             assertEquals(expectedResult, list.get(i));
-            expectedResult ++;
+            expectedResult++;
         }
     }
 
@@ -65,21 +64,21 @@ public class MyArrayListTest {
 
     @Test
     public void shouldReturnExactNumberOfElements() {
-        for (int i = 0; i <25 ; i++) {
+        for (int i = 0; i < 25; i++) {
             list.add(i);
         }
 
-        assertEquals(25,list.size());
+        assertEquals(25, list.size());
     }
 
     @Test
     public void shouldPointOnExpectElement() {
         Iterator<Integer> iterator = list.iterator();
-        for (int i = 0; i <25 ; i++) {
+        for (int i = 0; i < 25; i++) {
             list.add(i);
         }
 
-        for (int i = 0; i <25 ; i++) {
+        for (int i = 0; i < 25; i++) {
             assertEquals(list.get(i), iterator.next());
         }
     }
