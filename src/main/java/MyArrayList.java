@@ -1,6 +1,5 @@
 import java.util.Iterator;
 
-
 /**
  * The class is a self-expanding list with an array at the base
  *
