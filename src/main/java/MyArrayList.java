@@ -145,7 +145,7 @@ public class MyArrayList<T> implements MyList<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             private int cursor = 0;
 
             @Override
@@ -161,59 +161,5 @@ public class MyArrayList<T> implements MyList<T> {
                 return array[cursor++];
             }
         };
-    }
-
-//    /**
-//     * Method for initiate quick sort {@link Comparable} elements
-//     *
-//     * @see Comparable
-//     * @see MyArrayList#quickSort(Comparable[], int, int)
-//     */
-//    public void qSort() {
-//        T[] source = (T[]) this.array;
-//        int left = 0;
-//        int right = size;
-//        quickSort(source, left, right);
-//    }
-//
-//    /**
-//     * Method for quick sort {@link Comparable} elements
-//     *
-//     * @see Comparable
-//     */
-//    public <T extends Comparable<T>> void quickSort(T[] source, int left, int right) {
-//        int leftMarker = left;
-//        int rightMarker = right;
-//        T pivot = source[(leftMarker + rightMarker) / 2];
-//        do {
-//            while (pivot.compareTo(source[leftMarker]) > 0) {
-//                leftMarker++;
-//            }
-//            while (pivot.compareTo(source[rightMarker]) < 0) {
-//                rightMarker--;
-//            }
-//            if (leftMarker <= rightMarker) {
-//                if (leftMarker < rightMarker) {
-//                    swap(source, leftMarker, rightMarker);
-//                }
-//                leftMarker++;
-//                rightMarker--;
-//            }
-//        } while (leftMarker <= rightMarker);
-//        if (leftMarker < right) {
-//            quickSort(source, leftMarker, right);
-//        }
-//        if (left < rightMarker) {
-//            quickSort(source, left, rightMarker);
-//        }
-//    }
-
-    /**
-     * Method swap two elements in array
-     */
-    private <T> void swap(T[] array, int wall, int currentElement) {
-        T temp = array[wall];
-        array[wall] = array[currentElement];
-        array[currentElement] = temp;
     }
 }
